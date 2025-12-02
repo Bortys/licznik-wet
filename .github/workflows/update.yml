@@ -1,0 +1,32 @@
+name: Aktualizacja Licznika
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Uruchamiaj codziennie o 6:00 rano
+  workflow_dispatch:      # Pozwala też uruchomić ręcznie przyciskiem
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobranie kodu (Checkout)
+        uses: actions/checkout@v3
+
+      - name: Instalacja Pythona
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Uruchomienie skryptu (Robota)
+        run: python veto_scraper.py
+
+      - name: Zapisanie wyników (Commit)
+        run: |
+          git config --global user.name 'LicznikBot'
+          git config --global user.email 'bot@noreply.github.com'
+          git add veto_data.json
+          git commit -m "Automatyczna aktualizacja danych" || exit 0
+          git push
