@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik Wet Prezydenckich</title>
+    <style>
+        body {
+            background-color: #1a1a1a; /* Ciemne tło */
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 { text-transform: uppercase; letter-spacing: 2px; color: #aaa; }
+        
+        /* Styl tablicy wyników */
+        .scoreboard {
+            background: #000;
+            border: 4px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+        }
+        .score-box { text-align: center; }
+        .number {
+            font-size: 4em;
+            font-weight: bold;
+            display: block;
+            font-family: 'Courier New', monospace; /* Cyfrowy styl */
+        }
+        .label { font-size: 0.9em; text-transform: uppercase; color: #888; }
+        
+        /* Kolory liczników */
+        .red { color: #ff3333; text-shadow: 0 0 10px #ff3333; }
+        .green { color: #33ff33; text-shadow: 0 0 10px #33ff33; }
+        .yellow { color: #ffcc00; text-shadow: 0 0 10px #ffcc00; }
+
+        .update-info { font-size: 0.8em; color: #555; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tablica Legislacyjna</h1>
+
+        <div class="scoreboard">
+            <div class="score-box">
+                <span class="label">Podpisane</span>
+                <span id="signed" class="number green">--</span>
+            </div>
+            <div class="score-box">
+                <span class="label">WETA</span>
+                <span id="vetoed" class="number red">--</span>
+            </div>
+            <div class="score-box">
+                <span class="label">Trybunał</span>
+                <span id="tribunal" class="number yellow">--</span>
+            </div>
+        </div>
+
+        <div class="update-info" id="last-update">Ładowanie danych...</div>
+    </div>
+
+    <script>
+        // Ten kawałek kodu pobiera dane wyprodukowane przez Pythona
+        fetch('veto_data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('signed').innerText = data.stats.signed;
+                document.getElementById('vetoed').innerText = data.stats.vetoed;
+                document.getElementById('tribunal').innerText = data.stats.tribunal;
+                document.getElementById('last-update').innerText = "Ostatnia aktualizacja: " + data.last_updated;
+            })
+            .catch(error => {
+                console.error('Błąd:', error);
+                document.getElementById('last-update').innerText = "Błąd pobierania danych.";
+            });
+    </script>
+
+</body>
+</html>
