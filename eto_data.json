@@ -1,0 +1,35 @@
+{
+    "last_updated": "2025-12-02 08:15:00",
+    "stats": {
+        "signed": 42,
+        "vetoed": 19,
+        "tribunal": 3
+    },
+    "veto_list": [
+        {
+            "title": "Nowelizacja ustawy o Sądzie Najwyższym",
+            "date": "2025-11-28",
+            "status": "Weto prezydenckie"
+        },
+        {
+            "title": "Ustawa o zmianie ustawy Prawo oświatowe",
+            "date": "2025-11-15",
+            "status": "Weto prezydenckie"
+        },
+        {
+            "title": "Ustawa o podatku od reklam",
+            "date": "2025-10-30",
+            "status": "Weto odrzucone przez Sejm"
+        },
+        {
+            "title": "Ustawa o bezpieczeństwie energetycznym",
+            "date": "2025-10-12",
+            "status": "Weto prezydenckie"
+        },
+        {
+            "title": "Nowelizacja Kodeksu Wyborczego",
+            "date": "2025-09-05",
+            "status": "Weto prezydenckie"
+        }
+    ]
+}
