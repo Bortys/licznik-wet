@@ -1,15 +1,35 @@
 {
-    "last_updated": "2025-12-02 16:54:28",
+    "last_updated": "2025-12-02 17:08:12",
     "stats": {
-        "signed": 14,
-        "vetoed": 2,
-        "tribunal": 1
+        "signed": 42,
+        "vetoed": 19,
+        "tribunal": 3
     },
     "veto_list": [
         {
-            "title": "Przykładowa ustawa o mediach",
-            "date": "2025-10-15",
+            "title": "Nowelizacja ustawy o Sądzie Najwyższym",
+            "date": "2025-11-28",
+            "status": "Weto Prezydenckie"
+        },
+        {
+            "title": "Ustawa o zmianie ustawy Prawo oświatowe",
+            "date": "2025-11-15",
+            "status": "Weto Prezydenckie"
+        },
+        {
+            "title": "Ustawa o podatku od reklam",
+            "date": "2025-10-30",
             "status": "Weto odrzucone przez Sejm"
+        },
+        {
+            "title": "Ustawa o bezpieczeństwie energetycznym",
+            "date": "2025-10-12",
+            "status": "Weto Prezydenckie"
+        },
+        {
+            "title": "Nowelizacja Kodeksu Wyborczego",
+            "date": "2025-09-05",
+            "status": "Weto Prezydenckie"
         }
     ]
 }
