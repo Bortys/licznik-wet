@@ -3,88 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licznik Wet Prezydenckich</title>
+    <title>Licznik Wet Prezydenckich - Monitor Obywatelski</title>
     <style>
-        body {
-            background-color: #1a1a1a; /* Ciemne tło */
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
+        :root {
+            --bg-dark: #121212;
+            --bg-panel: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent-green: #00e676;
+            --accent-red: #ff1744;
+            --accent-yellow: #ffea00;
+            --border-glow: rgba(255, 255, 255, 0.1);
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        h1 { text-transform: uppercase; letter-spacing: 2px; color: #aaa; }
-        
-        /* Styl tablicy wyników */
-        .scoreboard {
-            background: #000;
-            border: 4px solid #333;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: space-around;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-        }
-        .score-box { text-align: center; }
-        .number {
-            font-size: 4em;
-            font-weight: bold;
-            display: block;
-            font-family: 'Courier New', monospace; /* Cyfrowy styl */
-        }
-        .label { font-size: 0.9em; text-transform: uppercase; color: #888; }
-        
-        /* Kolory liczników */
-        .red { color: #ff3333; text-shadow: 0 0 10px #ff3333; }
-        .green { color: #33ff33; text-shadow: 0 0 10px #33ff33; }
-        .yellow { color: #ffcc00; text-shadow: 0 0 10px #ffcc00; }
 
-        .update-info { font-size: 0.8em; color: #555; margin-top: 30px; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* --- Nawigacja --- */
+        nav {
+            background: rgba(0,0,0,0.8);
+            position: sticky;
+            top: 0;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo { font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-green); }
+
+        /* --- Kontenery --- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        section { margin-bottom: 60px; scroll-margin-top: 80px; }
+
+        /* --- Sekcja Hero (Licznik) --- */
+        .hero { text-align: center; padding: 40px 0; }
+        h1 { font-size: 2.5em; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        .president-name { color: var(--text-muted); font-size: 1.2em; margin-bottom: 40px; }
+
+        .scoreboard {
+            background: var(--bg-panel);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Efekt reflektora */
+        .scoreboard::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .score-box { text-align: center; padding: 10px; border-right: 1px solid #333; }
+        .score-box:last-child { border-right: none; }
+        .number {
+            font-size: 3.5em;
+            font-weight: 700;
+            display: block;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+        .label { font-size: 0.8em; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        
+        .c-green { color: var(--accent-green); text-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
+        .c-red { color: var(--accent-red); text-shadow: 0 0 15px rgba(255, 23, 68, 0.4); }
+        .c-yellow { color: var(--accent-yellow); text-shadow: 0 0 15px rgba(255, 234, 0, 0.4); }
+
+        /* --- Oś czasu (Timeline) --- */
+        .timeline-item {
+            background: var(--bg-panel);
+            border-left: 4px solid var(--accent-red);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.2s;
+        }
+        .timeline-item:hover { transform: translateX(5px); }
+        .t-date { font-size: 0.85em; color: var(--text-muted); }
+        .t-title { font-size: 1.2em; font-weight: bold; margin: 5px 0; }
+        .t-status { font-size: 0.9em; color: var(--accent-red); text-transform: uppercase; font-weight: bold; }
+
+        /* --- Sekcja Taktyka (Edukacja) --- */
+        .tactics-board {
+            background-color: #0a4d26; /* Trawa boiskowa */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+            border: 5px solid #fff;
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .play-step {
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid #fff;
+        }
+        .play-arrow { color: var(--accent-yellow); font-weight: bold; }
+
+        /* --- Sekcja Historia --- */
+        .history-panel {
+            background: linear-gradient(to right, #2c1a1a, var(--bg-panel));
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #8b0000;
+        }
+        blockquote {
+            font-style: italic;
+            border-left: 3px solid var(--text-muted);
+            margin: 20px 0;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #555;
+            font-size: 0.8em;
+            border-top: 1px solid #333;
+            margin-top: 60px;
+        }
+
+        /* Responsywność */
+        @media (max-width: 600px) {
+            .scoreboard { grid-template-columns: 1fr; }
+            .score-box { border-right: none; border-bottom: 1px solid #333; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Tablica Legislacyjna</h1>
-
-        <div class="scoreboard">
-            <div class="score-box">
-                <span class="label">Podpisane</span>
-                <span id="signed" class="number green">--</span>
-            </div>
-            <div class="score-box">
-                <span class="label">WETA</span>
-                <span id="vetoed" class="number red">--</span>
-            </div>
-            <div class="score-box">
-                <span class="label">Trybunał</span>
-                <span id="tribunal" class="number yellow">--</span>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Licznik Wet</div>
+            <div class="nav-links">
+                <a href="#licznik">Licznik</a>
+                <a href="#os-czasu">Lista</a>
+                <a href="#edukacja">Zasady Gry</a>
+                <a href="#historia">Historia</a>
             </div>
         </div>
+    </nav>
 
-        <div class="update-info" id="last-update">Ładowanie danych...</div>
+    <div class="container">
+
+        <section id="licznik" class="hero">
+            <h1>Tablica Legislacyjna</h1>
+            <div class="president-name">Prezydent: Karol Nawrocki</div>
+
+            <div class="scoreboard">
+                <div class="score-box">
+                    <span class="label">Podpisane Ustawy</span>
+                    <span id="signed" class="number c-green">...</span>
+                </div>
+                <div class="score-box">
+                    <span class="label">WETA PREZYDENCKIE</span>
+                    <span id="vetoed" class="number c-red">...</span>
+                </div>
+                <div class="score-box">
+                    <span class="label">Wnioski do TK</span>
+                    <span id="tribunal" class="number c-yellow">...</span>
+                </div>
+            </div>
+            <div style="font-size: 0.8em; color: #666; margin-top: 10px;" id="last-update">
+                Oczekiwanie na dane...
+            </div>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+
+        <section id="os-czasu">
+            <h2 style="border-bottom: 2px solid var(--accent-red); display: inline-block; padding-bottom: 5px;">Ostatnie Decyzje</h2>
+            <div id="timeline-container">
+                <p style="color: #666; font-style: italic;">Ładowanie historii...</p>
+            </div>
+        </section>
+
+        <section id="edukacja">
+            <h2>Taktyka Gry: Proces Legislacyjny</h2>
+            <p>Jak ustawa staje się prawem? Schemat "rozgrywki" na boisku legislacyjnym.</p>
+            
+            <div class="tactics-board">
+                <div class="play-step">
+                    <strong>1. Rozpoczęcie:</strong> Sejm uchwala ustawę (zwykła większość głosów).
+                </div>
+                <div class="play-step">
+                    <strong>2. Podanie do Senatu:</strong> Senat ma 30 dni. Może przyjąć, odrzucić lub wprowadzić poprawki.
+                </div>
+                <div class="play-step">
+                    <strong>3. Decydujący strzał (Prezydent):</strong> Ma 21 dni na decyzję.
+                    <br><span style="color: var(--accent-green)">● Podpis</span> = Prawo wchodzi w życie.
+                    <br><span style="color: var(--accent-red)">● Weto</span> = Odesłanie do Sejmu (ponowne rozpatrzenie).
+                    <br><span style="color: var(--accent-yellow)">● Trybunał</span> = Sprawdzenie zgodności z Konstytucją.
+                </div>
+                <div class="play-step">
+                    <strong>4. Dogrywka (po wecie):</strong> Sejm może odrzucić weto Prezydenta, ale potrzebuje aż 3/5 głosów. To bardzo trudne do wykonania.
+                </div>
+            </div>
+        </section>
+
+        <section id="historia">
+            <h2>Sala Historii: Weto a Liberum Veto</h2>
+            <div class="history-panel">
+                <h3>Władysław Siciński (1652)</h3>
+                <p>Poseł z Upity, który jako pierwszy w historii Rzeczypospolitej zerwał Sejm, używając "Liberum Veto". To symbol destrukcyjnej siły, która paraliżowała państwo, wymagając jednomyślności.</p>
+                
+                <h3 style="margin-top: 30px; color: var(--text-main);">Współczesne Weto (Art. 122 Konstytucji)</h3>
+                <p>To nie zerwanie obrad, lecz mechanizm bezpieczeństwa (checks and balances). Prezydent nie mówi "nie, bo nie", lecz zmusza parlament do ponownej refleksji i zebrania większego poparcia dla ustawy (3/5 głosów).</p>
+                
+                <blockquote>
+                    "Historia uczy nas, że brak sprzeciwu bywa groźniejszy niż nadmiar sporów. Jednak sprzeciw musi budować jakość prawa, a nie niszczyć państwo."
+                </blockquote>
+            </div>
+        </section>
+
     </div>
 
+    <footer>
+        <p>Projekt Civic Tech. Dane pobierane automatycznie z Systemu Informacyjnego Sejmu.</p>
+        <p>Strona ma charakter edukacyjno-informacyjny.</p>
+    </footer>
+
     <script>
-        // Ten kawałek kodu pobiera dane wyprodukowane przez Pythona
-        fetch('veto_data.json')
-            .then(response => response.json())
-            .then(data => {
+        async function loadData() {
+            try {
+                // Używamy './' żeby szukać pliku w tym samym folderze
+                const response = await fetch('./veto_data.json'); 
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+
+                // Aktualizacja liczników
                 document.getElementById('signed').innerText = data.stats.signed;
                 document.getElementById('vetoed').innerText = data.stats.vetoed;
                 document.getElementById('tribunal').innerText = data.stats.tribunal;
-                document.getElementById('last-update').innerText = "Ostatnia aktualizacja: " + data.last_updated;
-            })
-            .catch(error => {
-                console.error('Błąd:', error);
-                document.getElementById('last-update').innerText = "Błąd pobierania danych.";
-            });
-    </script>
+                document.getElementById('last-update').innerText = "Ostatnia aktualizacja danych: " + data.last_updated;
 
+                // Budowanie listy (Timeline)
+                const container = document.getElementById('timeline-container');
+                container.innerHTML = ''; // Wyczyść "ładowanie..."
+
+                if (data.veto_list.length === 0) {
+                    container.innerHTML = '<p>Brak wet w obecnej kadencji.</p>';
+                } else {
+                    data.veto_list.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'timeline-item';
+                        div.innerHTML = `
+                            <div class="t-date">${item.date}</div>
+                            <div class="t-title">${item.title}</div>
+                            <div class="t-status">${item.status}</div>
+                        `;
+                        container.appendChild(div);
+                    });
+                }
+
+            } catch (error) {
+                console.error('Szczegóły błędu:', error);
+                document.getElementById('last-update').innerText = "Oczekiwanie na pierwszą aktualizację danych...";
+                // Nie pokazujemy brzydkiego błędu, tylko neutralny komunikat
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
 </body>
 </html>
