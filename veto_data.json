@@ -1,0 +1,15 @@
+{
+    "last_updated": "2025-12-02 16:48:55",
+    "stats": {
+        "signed": 14,
+        "vetoed": 2,
+        "tribunal": 1
+    },
+    "veto_list": [
+        {
+            "title": "Przykładowa ustawa o mediach",
+            "date": "2025-10-15",
+            "status": "Weto odrzucone przez Sejm"
+        }
+    ]
+}
