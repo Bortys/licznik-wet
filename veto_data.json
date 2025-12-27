@@ -1,5 +1,5 @@
 {
-    "last_updated": "2025-12-26 06:39:53",
+    "last_updated": "2025-12-27 06:38:24",
     "stats": {
         "signed": 42,
         "vetoed": 19,
@@ -31,10 +31,16 @@
             "description": "Mimo sprzeciwu Prezydenta (argument o naruszeniu prawa własności), Sejm odrzucił weto większością 3/5 głosów."
         },
         {
-            "title": "Nowelizacja ustawy o prokuraturze",
-            "date": "2025-09-12",
+            "title": "Prawo o ruchu drogowym",
+            "date": "2025-09-20",
             "status": "Weto Prezydenckie",
-            "description": "Błędy formalne uniemożliwiające podpisanine ustawy."
+            "description": "Brak wymaganych konsultacji ze związkami zawodowymi."
+        },
+        {
+            "title": "Prawo budowlane",
+            "date": "2025-09-14",
+            "status": "Weto Prezydenckie",
+            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
         },
         {
             "title": "Nowelizacja ustawy o radiofonii i telewizji",
@@ -43,10 +49,10 @@
             "description": "Prezydent wskazał na zagrożenie dla pluralizmu mediów i ryzyko przejęcia rynku przez podmioty zagraniczne spoza EOG."
         },
         {
-            "title": "Ustawa o finansach publicznych",
-            "date": "2025-08-23",
+            "title": "Ustawa o szkolnictwie wyższym",
+            "date": "2025-08-21",
             "status": "Weto Prezydenckie",
-            "description": "Naruszenie zasady poprawnej legislacji (zbyt krótki termin vacatio legis)."
+            "description": "Brak wymaganych konsultacji ze związkami zawodowymi."
         },
         {
             "title": "Ustawa o bezpieczeństwie energetycznym (ETS2)",
@@ -55,68 +61,62 @@
             "description": "Zbyt wysokie koszty transformacji przerzucone na gospodarstwa domowe. Brak mechanizmów osłonowych dla najuboższych."
         },
         {
-            "title": "Ustawa o e-Doręczeniach",
-            "date": "2025-08-16",
+            "title": "Ustawa o finansach publicznych",
+            "date": "2025-07-18",
             "status": "Weto Prezydenckie",
             "description": "Błędy formalne uniemożliwiające podpisanine ustawy."
         },
         {
-            "title": "Ustawa o Służbie Cywilnej",
-            "date": "2025-08-10",
-            "status": "Weto Prezydenckie",
-            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
-        },
-        {
-            "title": "Ustawa o lasach państwowych",
-            "date": "2025-07-27",
-            "status": "Weto Prezydenckie",
-            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
-        },
-        {
             "title": "Ustawa o planowaniu przestrzennym",
-            "date": "2025-06-28",
+            "date": "2025-07-13",
             "status": "Weto Prezydenckie",
-            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
+            "description": "Błędy formalne uniemożliwiające podpisanine ustawy."
         },
         {
-            "title": "Prawo wodne",
-            "date": "2025-06-19",
+            "title": "Nowelizacja ustawy o prokuraturze",
+            "date": "2025-05-20",
             "status": "Weto Prezydenckie",
             "description": "Brak wymaganych konsultacji ze związkami zawodowymi."
         },
         {
-            "title": "Prawo budowlane",
-            "date": "2025-04-28",
+            "title": "Ustawa o Służbie Cywilnej",
+            "date": "2025-04-15",
             "status": "Weto Prezydenckie",
-            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
+            "description": "Błędy formalne uniemożliwiające podpisanine ustawy."
+        },
+        {
+            "title": "Ustawa o lasach państwowych",
+            "date": "2025-03-27",
+            "status": "Weto Prezydenckie",
+            "description": "Naruszenie zasady poprawnej legislacji (zbyt krótki termin vacatio legis)."
         },
         {
             "title": "Ustawa o ochronie zwierząt",
-            "date": "2025-04-24",
+            "date": "2025-03-23",
             "status": "Weto Prezydenckie",
             "description": "Naruszenie zasady poprawnej legislacji (zbyt krótki termin vacatio legis)."
         },
         {
             "title": "Nowelizacja Kodeksu Pracy",
-            "date": "2025-02-28",
+            "date": "2025-01-28",
             "status": "Weto Prezydenckie",
-            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
+            "description": "Brak wymaganych konsultacji ze związkami zawodowymi."
         },
         {
-            "title": "Ustawa o szkolnictwie wyższym",
-            "date": "2025-02-26",
+            "title": "Prawo wodne",
+            "date": "2025-01-28",
             "status": "Weto Prezydenckie",
-            "description": "Błędy formalne uniemożliwiające podpisanine ustawy."
+            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
         },
         {
             "title": "Kodeks Spółek Handlowych",
-            "date": "2025-02-20",
+            "date": "2025-01-25",
             "status": "Weto Prezydenckie",
-            "description": "Niezgodność z art. 2 Konstytucji RP (zasada zaufania do państwa)."
+            "description": "Brak wymaganych konsultacji ze związkami zawodowymi."
         },
         {
-            "title": "Prawo o ruchu drogowym",
-            "date": "2025-01-28",
+            "title": "Ustawa o e-Doręczeniach",
+            "date": "2025-01-14",
             "status": "Weto Prezydenckie",
             "description": "Naruszenie zasady poprawnej legislacji (zbyt krótki termin vacatio legis)."
         }
